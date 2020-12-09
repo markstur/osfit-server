@@ -1,8 +1,12 @@
 import os, sys, argparse, subprocess, signal
+from dotenv import load_dotenv
+
+load_dotenv()
+PORT = os.environ.get("PORT") or os.environ.get("VCAP_APP_PORT") or '8080'
 
 # Project defaults
 FLASK_APP = 'server/__init__.py'
-DEFAULT_IP = '0.0.0.0:3000'
+DEFAULT_IP = '0.0.0.0:' + PORT
 
 
 class Command:
@@ -103,7 +107,7 @@ parser.add_argument("ipaddress", nargs='?', default=DEFAULT_IP,
 
 
 def livereload_check():
-    check = subprocess.call("lsof -n -i4TCP:3000", shell=True)
+    check = subprocess.call("lsof -n -i4TCP:" + PORT, shell=True)
     if (check == 0):
         output = subprocess.check_output("pgrep Python", shell=True)
         pypid = int(output)
