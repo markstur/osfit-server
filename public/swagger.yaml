@@ -1,0 +1,73 @@
+swagger: '2.0'
+
+info:
+  version: "0.0.1"
+  title: OSWIN Server REST API
+
+consumes:
+  - text/plain
+
+produces:
+  - application/json
+
+paths:
+  /api/v1/callme:
+    post:
+      tags:
+      - "Initiate conversation"
+      summary: "Adds numbers to chat with"
+      description: "Phone numbers added here will be sent a text message"
+      operationId: "callMe"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Phone Numbers"
+        required: true
+        schema:
+          $ref: "#/definitions/CallMe"
+      responses:
+        "202":
+          description: "Accepted"
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Internal Server Error"
+  /health:
+    get:
+      operationId: get
+      description: Get health status of  
+      responses:
+        202:
+          description: "Health check response"
+          schema:
+            $ref: "#/definitions/healthResponse"
+          examples:
+            application/json: { "status": "UP"}
+
+definitions:
+  CallMe:
+    type: "array"
+    items:
+      type: object
+      required:
+      - "phone"
+      properties:
+        name:
+          type: "string"
+          example: "Blondie"
+        phone:
+          type: "string"
+          example: "1-555-555-5555"
+        message:
+          type: "string"
+          example: "Call me, call me any, anytime"
+  healthResponse:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+
