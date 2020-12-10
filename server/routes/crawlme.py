@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from flask import jsonify
 from flask import request
-from ibm_watson import DiscoveryV2
+from ibm_watson import DiscoveryV1
 from server import app
 from server.routes import prometheus
 
@@ -14,8 +14,8 @@ from server.routes import prometheus
 #
 load_dotenv()
 DISCOVERY_PROJECT_ID = os.environ.get('DISCOVERY_PROJECT_ID')
-DISCOVERY_COLLECTION_ID = os.environ.get('DISCOVERY_COLLECTION_ID')
-discovery = DiscoveryV2(version='2020-12-08')
+DISCOVERY_ENVIRONMENT_ID = os.environ.get('DISCOVERY_ENVIRONMENT_ID')
+discovery = DiscoveryV1(version='2020-12-08')
 
 
 @app.route("/api/v1/crawlme", methods=['POST'])
@@ -23,9 +23,8 @@ discovery = DiscoveryV2(version='2020-12-08')
 def crawlme():
     """crawlme url route"""
     input = request.get_json(force=True)
-    for i in input:
-        print("Crawlme input:", i)
-        crawl_url(i['url'])
+    print("INPUT:", input)
+    crawl_url(input.get('url'))
 
     state = {"status": "Accepted"}
     return jsonify(state), 202
@@ -49,13 +48,13 @@ def send_to_discovery(text_io):
 
     print("text_io type:", type(text_io))
 
-    if not (DISCOVERY_COLLECTION_ID and DISCOVERY_PROJECT_ID):
+    if not (DISCOVERY_COLLECTION_ID and DISCOVERY_ENVIRONMENT_ID):
         print("---> Skipping Discovery feed <--- (not configured)")
         return
 
     add_doc = discovery.add_document(
-        project_id=DISCOVERY_PROJECT_ID,
+        environment_id=DISCOVERY_ENVIRONMENT_ID,
         collection_id=DISCOVERY_COLLECTION_ID,
-        file=text_io).get_result()
+        file=text_io, filename="testfile").get_result()
 
     print(json.dumps(add_doc, indent=2))
