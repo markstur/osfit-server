@@ -12,9 +12,9 @@ from twilio.rest import Client
 # Your Account Sid and Auth Token from twilio.com/console
 # and set the environment variables. See http://twil.io/secure
 load_dotenv()
-account_sid = os.environ['TWILIO_ACCOUNT_SID']
-auth_token = os.environ['TWILIO_AUTH_TOKEN']
-from_phone_number = os.environ['TWILIO_PHONE_NUMBER']
+account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
+auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
+from_phone_number = os.environ.get('TWILIO_PHONE_NUMBER')
 client = Client(account_sid, auth_token)
 
 
