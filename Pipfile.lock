@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a737e9506788d8c1362cb56f9ce00db08bf4bc516418be45f79be4ab839d7309"
+            "sha256": "3a1554544b01b6083fc100fa1959c5bbf58db8e806e628ae4eb784365154ef8d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,15 @@
         ]
     },
     "default": {
+        "beautifulsoup4": {
+            "hashes": [
+                "sha256:4c98143716ef1cb40bf7f39a8e3eec8f8b009509e74904ba3a7b315431577e35",
+                "sha256:84729e322ad1d5b4d25f805bfa05b902dd96450f43842c4e99067d5e1369eb25",
+                "sha256:fff47e031e34ec82bf17e00da8f592fe7de69aeea38be00523c04623c04fb666"
+            ],
+            "index": "pypi",
+            "version": "==4.9.3"
+        },
         "certifi": {
             "hashes": [
                 "sha256:1a4995114262bffbc2413b159f2a1a480c969de6e6eb13ee966d470af86af59c",
@@ -45,6 +54,19 @@
             ],
             "index": "pypi",
             "version": "==1.1.2"
+        },
+        "ibm-cloud-sdk-core": {
+            "hashes": [
+                "sha256:f472ef5e603230613891b4817e563e77ace3c39cc8a12f47d1e741b867aa6513"
+            ],
+            "version": "==1.7.3"
+        },
+        "ibm-watson": {
+            "hashes": [
+                "sha256:b790842993375c11f9936314014314dfe067231315b425ab57656dd4f785788a"
+            ],
+            "index": "pypi",
+            "version": "==4.7.1"
         },
         "idna": {
             "hashes": [
@@ -124,6 +146,14 @@
             ],
             "version": "==1.7.1"
         },
+        "python-dateutil": {
+            "hashes": [
+                "sha256:73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c",
+                "sha256:75bb3f31ea686f1197762692a9ee6a7550b59fc6ca3a1f4b5d7e32fb98e2da2a"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==2.8.1"
+        },
         "python-dotenv": {
             "hashes": [
                 "sha256:0c8d1b80d1a1e91717ea7d526178e3882732420b03f08afea0406db6402e220e",
@@ -155,6 +185,14 @@
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==1.15.0"
         },
+        "soupsieve": {
+            "hashes": [
+                "sha256:1634eea42ab371d3d346309b93df7870a88610f0725d47528be902a0d95ecc55",
+                "sha256:a59dc181727e95d25f781f0eb4fd1825ff45590ec8ff49eadfd7f1a537cc0232"
+            ],
+            "markers": "python_version >= '3.0'",
+            "version": "==2.0.1"
+        },
         "twilio": {
             "hashes": [
                 "sha256:a168e76f04358bf503736fcca28e46d9bc4d795d4af10c8fd6003a2ae22e2f0f"
@@ -169,6 +207,13 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4'",
             "version": "==1.26.2"
+        },
+        "websocket-client": {
+            "hashes": [
+                "sha256:18f1170e6a1b5463986739d9fd45c4308b0d025c1b2f9b88788d8f69e8a5eb4a",
+                "sha256:db70953ae4a064698b27ae56dcad84d0ee68b7b43cb40940f537738f38f510c1"
+            ],
+            "version": "==0.48.0"
         },
         "werkzeug": {
             "hashes": [
