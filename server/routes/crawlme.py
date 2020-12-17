@@ -30,7 +30,6 @@ def crawlme():
     """crawlme url route"""
     input = request.get_json(force=True)
     print("INPUT:", input)
-
     # TODO: queue these and run with threading
     crawl_url(input.get('url'))
 
