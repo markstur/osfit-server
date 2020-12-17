@@ -10,6 +10,7 @@ twilio = "*"
 python-dotenv = "*"
 ibm-watson = "*"
 beautifulsoup4 = "*"
+lxml = "*"
 
 [dev-packages]
 
