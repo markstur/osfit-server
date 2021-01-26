@@ -85,6 +85,7 @@ def send_to_discovery(text_io, url):
     domain = urlparse(url).netloc
     path = urlparse(url).path.strip("/")
     url_as_string = str(domain + "-" + path)
+    print('filename:', url_as_string)
 #    output_file = os.path.join(url_as_string + suffix)
 
     add_doc = discovery.add_document(
