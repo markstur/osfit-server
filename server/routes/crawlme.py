@@ -41,7 +41,6 @@ def crawl_url(url, depth=0):
     
     print("url coming into crawl_url:", url)
     if "http" not in url:
-#        short_url = url
         url = "https://" + url
 
     print("new url after supposedly adding https:", url)
