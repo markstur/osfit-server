@@ -38,9 +38,7 @@ def crawlme():
 
 
 def crawl_url(url, depth=0):
-    if "http" in url:
-        pass
-    else:
+    if "http" not in url:
         short_url = url
         url = "https://" + short_url
 
