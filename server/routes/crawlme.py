@@ -101,10 +101,14 @@ def send_to_discovery(text_io, url):
     
     # use url domain-path as file name
     domain = urlparse(url).netloc
-    path = urlparse(url).path.strip("/")
-    url_as_string = str(domain + "-" + path)
-    print('filename:', url_as_string)
-#    output_file = os.path.join(url_as_string + suffix)
+    path = urlparse(url).path.split("/")
+    filename = str(domain)
+    if path:
+        for i in range(1, len(path)):
+            filename = str(filename + "\/" + path[i])
+    print('filename:', filename)
+
+    #    output_file = os.path.join(url_as_string + suffix)
 
     add_doc = discovery.add_document(
         environment_id=DISCOVERY_ENVIRONMENT_ID,
