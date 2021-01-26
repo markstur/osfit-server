@@ -68,11 +68,11 @@ cm.add(Command(
 
 cm.add(Command(
     "run",
-    "runs dev server using Flask's native debugger & backend reloader",
-    lambda c: ['python', '-m', 'flask', 'run', '--host=' + c['host'], '--port=' + c['port'], '--debugger', '--reload'],
+    "runs dev server using no debugger & no reloader",
+    lambda c: ['python', '-m', 'flask', 'run', '--host=' + c['host'], '--port=' + c['port'], '--no-debugger', '--no-reload'],
     {
         'FLASK_APP': FLASK_APP,
-        'FLASK_DEBUG': 'true'
+        'FLASK_DEBUG': 'false'
     }))
 
 cm.add(Command(
@@ -101,7 +101,7 @@ cm.add(Command(
 # Create and format argument parser for CLI
 parser = argparse.ArgumentParser(description=cm.availableCommands(),
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-parser.add_argument("subcommand", help="subcommand to run (see list above)")
+parser.add_argument("subcommand", nargs='?', default='run', help="subcommand to run (see list above)")
 parser.add_argument("ipaddress", nargs='?', default=DEFAULT_IP,
                     help="address and port to run on (i.e. {0})".format(DEFAULT_IP))
 
