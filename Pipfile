@@ -11,6 +11,9 @@ python-dotenv = "*"
 ibm-watson = "*"
 beautifulsoup4 = "*"
 lxml = "*"
+ibm-db = "*"
+sqlalchemy = "*"
+ibm-db-sa = "*"
 
 [dev-packages]
 
