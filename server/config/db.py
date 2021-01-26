@@ -26,13 +26,13 @@ if user and passwd and database and host and port:
 
     crawl_me = Table('CRAWL_ME', metadata,
                      Column('URL', String(2048)),
-                     Column('ROOT_URL', String(2048)),
+                     Column('PARENT_URL', String(2048)),
                      Column('POSTED', DateTime),
                      Column('DEPTH', Integer),
                      Column('CRAWLED', DateTime),
                      Column('STATUS', Integer))
 
-    crawl_me_insert = call_me.insert()
+    crawl_me_insert = crawl_me.insert()
 
     connection_str = f'db2+ibm_db://{user}:{passwd}@{host}:{port}/{database}'
     engine = create_engine(connection_str, echo=True)
