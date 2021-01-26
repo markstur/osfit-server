@@ -38,12 +38,13 @@ def crawlme():
 
 
 def crawl_url(url, depth=0):
-    print("url coming into crawl_url: ", url)
+    
+    print("url coming into crawl_url:", url)
     if "http" not in url:
 #        short_url = url
         url = "https://" + url
 
-    print("new url after supposedly adding https: ", url)
+    print("new url after supposedly adding https:", url)
     
     if url in crawled_urls:
         print("Skipping already crawled url:", url)
