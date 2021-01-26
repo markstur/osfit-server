@@ -59,7 +59,7 @@ def crawl_url(url, depth=0):
         return
 
     soup = BeautifulSoup(page.content, 'lxml')
-    send_to_discovery(soup.prettify())
+    send_to_discovery(soup.prettify(), url)
 
     if depth < max_depth:
         depth += 1
@@ -77,16 +77,22 @@ def crawl_url(url, depth=0):
         # print(link.get('href'))
 
 
-def send_to_discovery(text_io):
+def send_to_discovery(text_io, url):
 
     if not (DISCOVERY_COLLECTION_ID and DISCOVERY_ENVIRONMENT_ID):
         print("---> Skipping Discovery feed <--- (not configured)")
         return
+    
+    # use url domain-path as file name
+    domain = urlparse(url).netloc
+    path = urlparse(url).path.strip("/")
+    url_as_string = str(domain + "-" + path)
+#    output_file = os.path.join(url_as_string + suffix)
 
     add_doc = discovery.add_document(
         environment_id=DISCOVERY_ENVIRONMENT_ID,
         collection_id=DISCOVERY_COLLECTION_ID,
-        file=text_io, filename="testfile").get_result()
+        file=text_io, filename=url_as_string).get_result()
 
     print(json.dumps(add_doc, indent=2))
 
