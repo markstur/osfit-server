@@ -1,4 +1,4 @@
-
+import datetime
 import json
 import os
 import requests
@@ -7,8 +7,10 @@ from dotenv import load_dotenv
 from flask import jsonify
 from flask import request
 from ibm_watson import DiscoveryV1
+
 from server import app
 from server.routes import prometheus
+from server.config import db
 
 # Max crawl depth
 max_depth = 1
@@ -21,30 +23,34 @@ crawled_urls = []
 load_dotenv()
 DISCOVERY_COLLECTION_ID = os.environ.get('DISCOVERY_COLLECTION_ID')
 DISCOVERY_ENVIRONMENT_ID = os.environ.get('DISCOVERY_ENVIRONMENT_ID')
-discovery = DiscoveryV1(version='2020-12-08')
+
+discovery = None
+if DISCOVERY_COLLECTION_ID and DISCOVERY_ENVIRONMENT_ID:
+    discovery = DiscoveryV1(version='2020-12-08')
 
 
 @app.route("/api/v1/crawlme", methods=['POST'])
 @prometheus.track_requests
 def crawlme():
     """crawlme url route"""
-    input = request.get_json(force=True)
-    print("INPUT:", input)
+    crawl_this = request.get_json(force=True)
+    print("INPUT:", crawl_this)
     # TODO: queue these and run with threading
-    crawl_url(input.get('url'))
+    crawl_url(crawl_this.get('url'), datetime.datetime.now(), depth=0)
 
     state = {"status": "Accepted"}
     return jsonify(state), 202
 
 
-def crawl_url(url, depth=0):
-    
+def crawl_url(url, posted, depth=0, root_url=None):
     print("url coming into crawl_url:", url)
     if "http" not in url:
         url = "https://" + url
 
     print("new url after supposedly adding https:", url)
+    root_url = root_url or url
     
+    # if db.is_crawled(url):
     if url in crawled_urls:
         print("Skipping already crawled url:", url)
         return
@@ -55,6 +61,17 @@ def crawl_url(url, depth=0):
     except Exception as e:
         print(e)
         return
+
+    db.insert_crawl_me(
+        {
+            'URL': url,
+            'ROOT_URL': root_url,
+            'POSTED': posted,
+            'DEPTH': depth,
+            'CRAWLED': datetime.datetime.now(),
+            'STATUS': page.status_code
+        }
+    )
 
     soup = BeautifulSoup(page.content, 'lxml')
     send_to_discovery(soup.prettify(), url)
@@ -70,14 +87,14 @@ def crawl_url(url, depth=0):
         ]
         print('All URLs found: ', new_links)
         for i in new_links:
-            crawl_url(i, depth)
+            crawl_url(i, posted, depth, root_url)
         # for link in soup.find_all('a'):
         # print(link.get('href'))
 
 
 def send_to_discovery(text_io, url):
 
-    if not (DISCOVERY_COLLECTION_ID and DISCOVERY_ENVIRONMENT_ID):
+    if not discovery:
         print("---> Skipping Discovery feed <--- (not configured)")
         return
     
