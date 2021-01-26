@@ -65,7 +65,7 @@ def crawl_url(url, posted, depth=0, root_url=None):
     db.insert_crawl_me(
         {
             'URL': url,
-            'ROOT_URL': root_url,
+            'PARENT_URL': root_url,
             'POSTED': posted,
             'DEPTH': depth,
             'CRAWLED': datetime.datetime.now(),
