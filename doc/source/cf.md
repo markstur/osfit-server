@@ -2,6 +2,7 @@
 
 This document shows how to deploy the server using Cloud Foundry on IBM Cloud.
 
+
 [![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button_x2.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/markstur/osfit-server.git)
 
 1. Click the above `Deploy to IBM Cloud` button and then click on the `Delivery Pipeline` tool integration.
@@ -25,3 +26,4 @@ This document shows how to deploy the server using Cloud Foundry on IBM Cloud.
 1. Go back to the README.md for instructions on how to use the REST services.
 
 [![return](https://raw.githubusercontent.com/IBM/pattern-utils/master/deploy-buttons/return.png)](https://github.com/markstur/osfit-server#use-the-rest-services)
+
