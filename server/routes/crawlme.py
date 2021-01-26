@@ -9,6 +9,7 @@ from flask import request
 from ibm_watson import DiscoveryV1
 from server import app
 from server.routes import prometheus
+from server.config import db
 from urllib.parse import urlparse
 
 # Max crawl depth
