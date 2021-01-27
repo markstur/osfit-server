@@ -57,6 +57,13 @@ def crawl_url(url, posted, depth=0, root_url=None):
         return
     crawled_urls.append(url)
 
+    # filter out urls that end in .png, .js, .css
+    end_url = os.path.basename(url)
+
+    if end_url.endswith(('.png', '.js', '.css')):
+        print('invalid url', end_url)
+        return
+
     try:
         page = requests.get(url)
     except Exception as e:
