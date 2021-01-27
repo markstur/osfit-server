@@ -113,7 +113,7 @@ def send_to_discovery(text_io, url):
     add_doc = discovery.add_document(
         environment_id=DISCOVERY_ENVIRONMENT_ID,
         collection_id=DISCOVERY_COLLECTION_ID,
-        file=text_io, filename=url_as_string).get_result()
+        file=text_io, filename=filename).get_result()
 
     print(json.dumps(add_doc, indent=2))
 
