@@ -48,7 +48,7 @@ def crawl_url(url, posted, depth=0, root_url=None):
     if "http" not in url:
         url = "https://" + url
 
-    print("new url after supposedly adding https:", url)
+    print("new url after adding https (if needed):", url)
     root_url = root_url or url
     
     # if db.is_crawled(url):
@@ -60,7 +60,7 @@ def crawl_url(url, posted, depth=0, root_url=None):
     # filter out urls that end in .png, .js, .css
     end_url = os.path.basename(url)
 
-    if end_url.endswith(('.png', '.js', '.css')):
+    if end_url.endswith(('.png', '.js', '.css', '.jpg', '.aspx', 'php', '.jsp', '.php', '.rss', '.ashx', '.ece')):
         print('invalid url', end_url)
         return
 
