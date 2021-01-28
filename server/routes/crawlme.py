@@ -47,8 +47,8 @@ def crawl_url(url, posted, depth=0, root_url=None):
     print("url coming into crawl_url:", url)
     if "http" not in url:
         url = "https://" + url
-
     print("new url after adding https (if needed):", url)
+    
     root_url = root_url or url
     
     # if db.is_crawled(url):
@@ -83,6 +83,15 @@ def crawl_url(url, posted, depth=0, root_url=None):
 
     soup = BeautifulSoup(page.content, 'lxml')
     send_to_discovery(soup.prettify(), url)
+    
+    # Check for a client-side redirect URL
+    redirect = soup.find('meta',attrs={'http-equiv':'refresh'})
+    if redirect:
+        wait,text=redirect["content"].split(";")
+        if text.strip().lower().startswith("url="):
+            redirect_url=text[4:]
+            print('redirect_url = ', redirect_url)
+            crawl_url(redirect_url, posted, depth, root_url) 
 
     if depth < max_depth:
         depth += 1
