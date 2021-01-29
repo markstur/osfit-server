@@ -42,11 +42,9 @@ def crawlme():
     # Check if url=pause; workaround for Assistant pauses not working with SMS with Twilio integration
     if crawl_this.get('url')=='pause':
         print("I'm in the if module!")
-        # Wait for 7 seconds
-        time.sleep(7)
-        print("Slept for 5 seconds")
-        state = {"status": "Accepted"}
-        return jsonify(state), 202
+        # Wait for 6 seconds
+        time.sleep(6)
+        print("Slept for 6 seconds")
     else:
         # TODO: queue these and run with threading
         crawl_url(crawl_this.get('url'), datetime.datetime.now(), depth=0)
