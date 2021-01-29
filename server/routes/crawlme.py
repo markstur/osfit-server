@@ -2,6 +2,7 @@ import datetime
 import json
 import os
 import requests
+import time
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from flask import jsonify
@@ -36,6 +37,13 @@ def crawlme():
     """crawlme url route"""
     crawl_this = request.get_json(force=True)
     print("INPUT:", crawl_this)
+    
+    # Check if url=pause; workaround for Assistant pauses not working with SMS with Twilio integration
+    if crawl_this.get('url', datetime.datetime.now(), depth=0)=="pause":
+        # Wait for 5 seconds
+        time.sleep(5)
+        return
+    
     # TODO: queue these and run with threading
     crawl_url(crawl_this.get('url'), datetime.datetime.now(), depth=0)
 
