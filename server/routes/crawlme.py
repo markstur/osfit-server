@@ -46,6 +46,10 @@ def crawlme():
     
     # TODO: queue these and run with threading
     crawl_url(crawl_this.get('url'), datetime.datetime.now(), depth=0)
+    
+    if crawl_url=="pause":
+        # Wait for 5 seconds
+        time.sleep(5)
 
     state = {"status": "Accepted"}
     return jsonify(state), 202
