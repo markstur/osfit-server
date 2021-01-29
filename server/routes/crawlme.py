@@ -34,6 +34,7 @@ if DISCOVERY_COLLECTION_ID and DISCOVERY_ENVIRONMENT_ID:
 @app.route("/api/v1/crawlme", methods=['POST'])
 @prometheus.track_requests
 def crawlme():
+    print("I'm in the crawlme function!")
     """crawlme url route"""
     crawl_this = request.get_json(force=True)
     print("INPUT:", crawl_this)
