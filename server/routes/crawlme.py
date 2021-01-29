@@ -56,6 +56,7 @@ def crawlme():
 
 
 def crawl_url(url, posted, depth=0, root_url=None):
+    print("I'm in crawl_url function, how did I get here?")
     print("url coming into crawl_url:", url)
     if "http" not in url:
         url = "https://" + url
