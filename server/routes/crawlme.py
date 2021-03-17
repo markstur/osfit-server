@@ -121,9 +121,11 @@ def crawl_url(url, posted, depth=0, root_url=None):
             for item in soup.select('[href^="http"], [src^="http"]')
         ]
         for x in new_links:
-            modified_links = x.split('?')[0]
-        print('All URLs found: ', modified_links)
-        for i in modified_links:
+            modified_link = x.split('?')[0]
+            new_urls.append(modified_link)
+        print('All URLs found: ', new_urls)
+        
+        for i in new_urls:
             crawl_url(i, posted, depth, root_url)
         # for link in soup.find_all('a'):
         # print(link.get('href'))
