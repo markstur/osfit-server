@@ -41,10 +41,11 @@ def crawlme():
     
     # Check if url=pause; workaround for Assistant pauses not working with SMS with Twilio integration
     if crawl_this.get('url')=='pause':
-        print("I'm in the if module!")
-        # Wait for 4 seconds
-        time.sleep(4)
-        print("Slept for 4 seconds")
+        print("Sleeping...")
+        # Wait for 6 seconds
+        time.sleep(6)
+        print("Slept for 6 seconds")
+
     else:
         # TODO: queue these and run with threading
         crawl_url(crawl_this.get('url'), datetime.datetime.now(), depth=0)
@@ -57,7 +58,12 @@ def crawl_url(url, posted, depth=0, root_url=None):
     print("url coming into crawl_url:", url)
     if "http" not in url:
         url = "https://" + url
-    print("new url after adding https (if needed):", url)
+        print("new url after adding https (if needed):", url)
+
+    if ' ' in url:
+        url.replace(" ", "")
+        print("new url after removing spaces:", url)
+        
     
     root_url = root_url or url
     
@@ -69,8 +75,9 @@ def crawl_url(url, posted, depth=0, root_url=None):
 
     # filter out urls that end in .png, .js, .css
     end_url = os.path.basename(url)
+    print("url basename:", end_url)
 
-    if end_url.endswith(('.png', '.js', '.css', '.jpg', '.aspx', 'php', '.jsp', '.php', '.rss', '.ashx', '.ece')):
+    if end_url.endswith(('.png', '.js', '.css', '.jpg', '.aspx', '.php', '.jsp', '.php', '.rss', '.ashx', '.ece')):
         print('invalid url', end_url)
         return
 
