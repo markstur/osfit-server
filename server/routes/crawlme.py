@@ -45,6 +45,7 @@ def crawlme():
         # Wait for 6 seconds
         time.sleep(6)
         print("Slept for 6 seconds")
+
     else:
         # TODO: queue these and run with threading
         crawl_url(crawl_this.get('url'), datetime.datetime.now(), depth=0)
