@@ -61,7 +61,7 @@ def crawl_url(url, posted, depth=0, root_url=None):
         print("new url after adding https (if needed):", url)
 
     if ' ' in url:
-        url.replace(' ', '')
+        url = url.replace(' ', '')
 #        url.translate(None,' ')
         print("new url after removing spaces:", url)
         
