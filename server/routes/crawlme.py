@@ -120,7 +120,7 @@ def crawl_url(url, posted, depth=0, root_url=None):
             item['href'] if item.get('href') is not None else item['src']
             for item in soup.select('[href^="http"], [src^="http"]')
         ]
-        for x in url_list:
+        for x in new_links:
             modified_links = x.split('?')[0]
         print('All URLs found: ', modified_links)
         for i in modified_links:
