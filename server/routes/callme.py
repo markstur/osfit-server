@@ -51,10 +51,18 @@ def caller():
             }
         )
 
-        s = random.randint(sleep_min, sleep_max)
-        print('Wait ', s, 'seconds')
-        time.sleep(s)
         q.task_done()
+        if q.empty():
+            return
+        else:
+            s = random.randint(sleep_min, sleep_max)
+            print('Wait ', s, 'seconds')
+            time.sleep(s)
+               
+#        s = random.randint(sleep_min, sleep_max)
+#        print('Wait ', s, 'seconds')
+#        time.sleep(s)
+#        q.task_done()
 
 
 threading.Thread(target=caller, daemon=True).start()
