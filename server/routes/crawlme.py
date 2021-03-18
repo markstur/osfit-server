@@ -78,7 +78,7 @@ def crawl_url(url, posted, depth=0, root_url=None):
     end_url = os.path.basename(url)
     print("url basename:", end_url)
 
-    if end_url.endswith(('.png', '.js', '.css', '.jpg', '.aspx', '.php', '.jsp', '.php', '.rss', '.ashx', '.ece', '.mp3', '.mp4')):
+    if end_url.endswith(('.png', '.js', '.css', '.jpg', '.aspx', '.php', '.jsp', '.php', '.rss', '.ashx', '.ece', '.mp3', '.mp4', '.ico')):
         print('skipping urls with this ending:', url)
         return
 
