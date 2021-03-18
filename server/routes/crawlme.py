@@ -56,6 +56,7 @@ def crawlme():
 
 
 def crawl_url(url, posted, depth=0, root_url=None):
+    new_urls = []
     print("url coming into crawl_url:", url)
     if "http" not in url:
         url = "https://" + url
@@ -63,10 +64,8 @@ def crawl_url(url, posted, depth=0, root_url=None):
 
     if ' ' in url:
         url = url.replace(' ', '')
-#        url.translate(None,' ')
         print("new url after removing spaces:", url)
-        
-    
+         
     root_url = root_url or url
     
     # if db.is_crawled(url):
