@@ -19,7 +19,7 @@ max_depth = 1
 
 # Create array to store URLs that we have already crawled
 crawled_urls = []
-new_urls = []
+#new_urls = []
 
 # Initialize the Discovery client
 #
@@ -115,7 +115,6 @@ def crawl_url(url, posted, depth=0, root_url=None):
         depth += 1
         # recursive crawl...
         # extract links from 'href' and 'src'
-        # future: do something intelligent to only crawl interesting ones
         new_links = [
             item['href'] if item.get('href') is not None else item['src']
             for item in soup.select('[href^="http"], [src^="http"]')
