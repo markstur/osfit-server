@@ -127,9 +127,6 @@ def crawl_url(url, posted, depth=0, root_url=None):
         
         for i in new_urls:
             crawl_url(i, posted, depth, root_url)
-        # for link in soup.find_all('a'):
-        # print(link.get('href'))
-
 
 def send_to_discovery(text_io, url):
 
