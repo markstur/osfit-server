@@ -127,9 +127,6 @@ def crawl_url(url, posted, depth=0, root_url=None):
         
         for i in new_urls:
             crawl_url(i, posted, depth, root_url)
-        # for link in soup.find_all('a'):
-        # print(link.get('href'))
-
 
 def send_to_discovery(text_io, url):
 
@@ -155,20 +152,4 @@ def send_to_discovery(text_io, url):
 
     print(json.dumps(add_doc, indent=2))
 
-    # write html to file as text, use url domain-path as file name
-    # domain = urlparse(url).netloc
 
-
-# def get_filename(url):
-#
-    # # !! Need to remove all '/' and replace with '-', below doesn't work
-    # # path = urlparse(url).path.split.replace("/","-")
-    # path = urlparse(url).path.strip("/")
-    # url_as_string = str(domain + "-" + path)
-    # suffix = '.txt'
-    # save_path = os.getcwd()
-    # output_file = os.path.join(save_path, url_as_string + suffix)
-    # with open(output_file, 'w', encoding='utf-8') as file:
-        # file.write(soup.prettify())
-    # print('Output file name is ', output_file)
-    # print("\n")
